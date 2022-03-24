@@ -1,11 +1,10 @@
- <!-- Portfolio Modals -->
- {% for post in site.posts %}
-    <div class="portfolio-modal modal fade" id="portfolioModal{{ post.modal-id }}" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Portfolio Modals -->
+{% for post in site.posts %}
+    <div aria-hidden="true" class="portfolio-modal modal fade" id="portfolioModal{{ post.modal-id }}" role="dialog" tabindex="-1">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
-                    <div class="rl">
-                    </div>
+                    <div class="rl"></div>
                 </div>
             </div>
             <div class="container">
@@ -14,23 +13,36 @@
                         <div class="modal-body">
                             <h2>{{ post.title }}</h2>
                             <hr class="star-primary">
-                            <a href="{{ post.projecturl }}" target="_blank"><img src="img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="{{ post.alt }}"></a>
+                            {% if post.projecturl != "N/A" %}
+                            <a href="{{ post.projecturl }}"><img src="img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="{{ post.alt }}"></a>
+                            {% else %}
+                            <img src="img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="{{ post.alt }}">
+                            {% endif %}
                             <p>{{ post.description }}</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
-                                    <strong><a href="{{ post.clienturl }}" target="_blank">{{ post.client }}</a>
+                                    <strong >
+                                        {% if post.clienturl != "N/A" %}
+                                        <a href="{{ post.clienturl }}">{{ post.client }}</a>
+                                        {% else %}
+                                        <a>{{ post.client}}</a>
+                                        {% endif %}
                                     </strong>
                                 </li>
                                 <li>Date:
-                                    <strong><a>{{ post.project-date }}</a>
+                                    <strong>
+                                        <a>{{ post.project-date }}</a>
                                     </strong>
                                 </li>
                                 <li>Service:
-                                    <strong><a>{{ post.category }}</a>
+                                    <strong>
+                                        <a>{{ post.category }}</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button class="btn btn-default" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Close</button>
                         </div>
                     </div>
                 </div>
